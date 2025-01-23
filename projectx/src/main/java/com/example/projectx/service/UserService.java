@@ -1,22 +1,29 @@
 package com.example.projectx.service;
 
-import com.example.projectx.entity.MongoConnect;
+import com.example.projectx.entity.User;
 import com.example.projectx.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
+
     @Autowired
     private UserRepository userRepository;
 
-    public List<MongoConnect> getAllUsers() {
-        return userRepository.findAll();  // Fetches all users from MongoDB
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
-    public MongoConnect createUser(MongoConnect user) {
-        return userRepository.save(user);  // Saves a new user to MongoDB
+    public Optional<User> getUserById(Long id) {
+        return userRepository.findById(id);
+    }
+
+    public User createUser(User user) {
+        return userRepository.save(user);
     }
 }

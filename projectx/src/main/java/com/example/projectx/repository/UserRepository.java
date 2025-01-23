@@ -1,8 +1,7 @@
 package com.example.projectx.repository;
 
-import com.example.projectx.entity.MongoConnect;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import com.example.projectx.entity.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends MongoRepository<MongoConnect, String> {
-    // Custom queries can go here if needed
+public interface UserRepository extends JpaRepository<User, Long> {
 }
