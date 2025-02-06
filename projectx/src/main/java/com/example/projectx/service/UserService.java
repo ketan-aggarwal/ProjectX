@@ -26,4 +26,13 @@ public class UserService {
     public User createUser(User user) {
         return userRepository.save(user);
     }
+
+    public Optional<User> findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    public boolean authenticate(String email, String password) {
+        Optional<User> user = userRepository.findByEmail(email);
+        return user.isPresent() && user.get().getPassword().equals(password);  // Direct password comparison
+    }
 }

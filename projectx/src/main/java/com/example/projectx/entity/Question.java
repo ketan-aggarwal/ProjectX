@@ -18,21 +18,29 @@ public class Question {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("id")
     private Long id;
 
     @Column(nullable = false)
     @JsonProperty("questionText")
     private String questionText; // The content of the question
 
+
+//    @Column(nullable = false)
+//    @JsonProperty("asker_id")
+//    private long asker_id;
+
     @ManyToOne
-    @JsonProperty("asker_id")
     @JoinColumn(name = "asker_id", nullable = false)
-    private User asker; // The user who asked the question, references the User entity
+    @JsonProperty("asker")
+    private User asker;
 
     @Column(nullable = false)
+    @JsonProperty("createdAt")
     private LocalDateTime createdAt; // Timestamp of when the question was asked
 
     @Column(nullable = false)
+    @JsonProperty("isAnswered")
     private Boolean isAnswered = false; // Whether the question has been answered or not
 
     @PrePersist

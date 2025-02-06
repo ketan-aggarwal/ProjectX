@@ -30,9 +30,9 @@ public class QuestionService {
     }
 
     // Get questions by asker (User)
-    public List<Question> getQuestionsByAsker(Long askerId) {
-        return questionRepository.findByAskerId(askerId);
-    }
+//    public List<Question> getQuestionsByAsker(Long askerId) {
+//        return questionRepository.findByAskerId(askerId);
+//    }
 
     // You can add more methods as needed (e.g., for updates, deletes, etc.)
 }

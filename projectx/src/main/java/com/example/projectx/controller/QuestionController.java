@@ -36,11 +36,6 @@ public class QuestionController {
         return ResponseEntity.status(201).body(createdQuestion);
     }
 
-    // Get all questions by a specific asker (user)
-    @GetMapping("/asker/{askerId}")
-    public List<Question> getQuestionsByAsker(@PathVariable Long askerId) {
-        return questionService.getQuestionsByAsker(askerId);
-    }
 
-    // You can add other endpoints as needed (e.g., for updating, deleting questions, etc.)
+
 }

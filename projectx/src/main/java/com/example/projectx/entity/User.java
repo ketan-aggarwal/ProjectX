@@ -14,6 +14,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class User {
 
+    public String getEmail() {
+        return email;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("id")
@@ -26,6 +30,10 @@ public class User {
     @Column(nullable = false, unique = true)
     @JsonProperty("email")
     private String email;
+
+    @Column(nullable = false, unique = true)
+    @JsonProperty("password")
+    private String password;
 
     @Column(nullable = false, updatable = false)
     @JsonProperty("createdAt")
@@ -41,6 +49,17 @@ public class User {
     public void prePersist() {
         LocalDateTime now = LocalDateTime.now();
         this.createdAt = now;
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public Role getRole() {
+        return this.role;
+    }
+    public String getPassword() {
+        return this.password;
     }
 
     public enum Role {
