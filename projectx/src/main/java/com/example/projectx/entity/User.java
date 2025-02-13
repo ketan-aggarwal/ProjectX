@@ -35,14 +35,15 @@ public class User {
     @JsonProperty("password")
     private String password;
 
-    @Column(nullable = false, updatable = false)
-    @JsonProperty("createdAt")
-    private LocalDateTime createdAt;
-
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     @JsonProperty("role")
     private Role role;
+    @Column(nullable = false, updatable = false)
+    @JsonProperty("createdAt")
+    private LocalDateTime createdAt;
+
+
 
     // This method will be called before the entity is persisted (inserted into DB)
     @PrePersist
