@@ -2,37 +2,29 @@ package com.example.projectx.service;
 
 import com.example.projectx.entity.User;
 import com.example.projectx.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
-
-
-import java.util.List;
 import java.util.Optional;
 
+// UserService.java
 @Service
 public class UserService {
+    private final UserRepository userRepository;
 
-    @Autowired
-    private UserRepository userRepository;
-
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-    public Optional<User> getUserById(Long id) {
-        return userRepository.findById(id);
+    public User findOrCreateUser(String email, String name) {
+        return userRepository.findByEmail(email)
+                .orElseGet(() -> createUser(email, name));
     }
 
-    public User createUser(User user) {
-        return userRepository.save(user);
-    }
-
-    public Optional<User> findByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
-
-    public boolean authenticate(String email, String password) {
-        Optional<User> user = userRepository.findByEmail(email);
-        return user.isPresent() && user.get().getPassword().equals(password);  // Direct password comparison
+    private User createUser(String email, String name) {
+        User newUser = new User();
+        newUser.setEmail(email);
+        newUser.setName(name);
+        newUser.setProvider("google");
+        return userRepository.save(newUser);
     }
 }

@@ -1,69 +1,53 @@
 package com.example.projectx.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.*;
-import lombok.*;
 
-
-import java.time.LocalDateTime;
-
+// User.java
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Table(name = "users")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(unique = true, nullable = false)
+    private String email;
+
+    private String name;
+    private String provider; // "google", "local", etc.
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getEmail() {
         return email;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonProperty("id")
-    private Long id;
-
-    @Column(nullable = false)
-    @JsonProperty("name")
-    private String name;
-
-    @Column(nullable = false, unique = true)
-    @JsonProperty("email")
-    private String email;
-
-    @Column(nullable = false, unique = true)
-    @JsonProperty("password")
-    private String password;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    @JsonProperty("role")
-    private Role role;
-    @Column(nullable = false, updatable = false)
-    @JsonProperty("createdAt")
-    private LocalDateTime createdAt;
-
-
-
-    // This method will be called before the entity is persisted (inserted into DB)
-    @PrePersist
-    public void prePersist() {
-        LocalDateTime now = LocalDateTime.now();
-        this.createdAt = now;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public Long getId() {
-        return this.id;
+    public String getName() {
+        return name;
     }
 
-    public Role getRole() {
-        return this.role;
-    }
-    public String getPassword() {
-        return this.password;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public enum Role {
-        ASKER, RESPONDER
+    public String getProvider() {
+        return provider;
     }
+
+    public void setProvider(String provider) {
+        this.provider = provider;
+    }
+
+
 }
